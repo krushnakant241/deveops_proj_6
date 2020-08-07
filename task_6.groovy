@@ -3,7 +3,7 @@ job("Job1-Devops_task_6")
 	description("First Job: To download GitHub code")
         
 	scm {
-		github('krushnakant241/devops_proj_6', 'master')
+		github('krushnakant241/deveops_proj_6', 'master')
 		}
 	
 	triggers { 
