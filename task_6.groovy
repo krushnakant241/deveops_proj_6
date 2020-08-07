@@ -147,9 +147,9 @@ fi
         downstreamParameterized {
             trigger('Job4-Devops_task_6') {
                 condition('FAILED')
-                parameters {
-                    currentBuild()
-                }
+//               parameters {
+//                    currentBuild()
+//                }
             }
         }
     }
@@ -159,9 +159,6 @@ job("Job4-Devops_task_6")
 {
 	description("Fourth Job: Sending Mail")
 
-	triggers {
-		upstream('Job3-Devops_task_6','FAILURE')
-			}
 	steps {
 		shell('''
 echo "There is a some error in code or no suitable code found, please refer the logs of job3"
