@@ -6,12 +6,14 @@ Perform below task on top of Kubernetes where we use Kubernetes resources like P
 1. Create container image that’s has Jenkins installed  using dockerfile  Or You can use the Jenkins Server on RHEL 8/7
 2. When we launch this image, it should automatically starts Jenkins service in the container.
 3. Create a job chain of job1, job2, job3 and  job4 using build pipeline plugin in Jenkins 
-4. Job2(seed job) : Pull  the Github repo automatically when some developers push repo to Github.
+4. Job1(seed job) : Pull  the Github repo automatically when some developers push repo to Github.
 5. Further on jobs should be pipeline using written code using Groovy language bye the developer.
-6. Job1 : 
-    a). By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed )
-    b).  Expose your pod so that testing team could perform the testing on the pod
-    c). Make the data to remain persistent ( If server collects some data like logs, other user information )
+6. Job2 : 
+    i). By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes (e.g. If code is of  PHP, then Jenkins should start the container that has PHP already installed)
+    
+    ii).  Expose your pod so that testing team could perform the testing on the pod
+    
+    iii). Make the data to remain persistent (If server collects some data like logs, other user information)
 6. Job3 : Test your app if it  is working or not.
 7. Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
 
