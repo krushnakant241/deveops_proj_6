@@ -160,7 +160,7 @@ job("Job4-Devops_task_6")
 	description("Fourth Job: Sending Mail")
 
 	triggers {
-		upstream('Job3-Devops_task_6','UNSTABLE_OR_FAILURE')
+		upstream('Job3-Devops_task_6','FAILURE')
 			}
 	steps {
 		shell('''
