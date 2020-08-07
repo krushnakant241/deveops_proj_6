@@ -149,7 +149,7 @@ job("Job4-Devops_task_6")
 	description("fourth Job: Sending Mail")
 
 	triggers {
-		upstream('Job3-Devops_task_6','failure')
+		upstream('Job3-Devops_task_6','FAILURE')
 			}
 	
 	publishers {
