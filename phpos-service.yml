@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpos
+  labels:
+    app: phpos
+spec:
+  ports:
+    - port: 80
+      nodePort: 30001
+  type: NodePort
+  selector:
+    app: phpos

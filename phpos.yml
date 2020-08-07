@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpos
+  labels:
+    app: phpos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpos
+  strategy:
+    type: Recreate    
+  template:
+    metadata:
+      labels:
+        app: phpos
+    spec:
+      containers:
+      - name: phpos
+        image: vimal13/apache-webserver-php:latest
+        ports:
+        - containerPort: 80
+          name: phpos
+        volumeMounts:
+        - name: phpos-persistent-storage
+          mountPath: /var/www/html
+      volumes: 
+      - name: phpos-persistent-storage
+        persistentVolumeClaim:
+          claimName: phpos-pvc-claim

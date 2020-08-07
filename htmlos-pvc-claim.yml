@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: htmlos-pvc-claim
+  labels:
+    name: htmlospvcclaim
+spec: 
+  accessModes:
+    - ReadWriteOnce
+  resources: 
+    requests:
+      storage: 2Gi
