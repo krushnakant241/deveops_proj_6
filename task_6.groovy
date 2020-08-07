@@ -146,7 +146,7 @@ fi
 		publishers {
         downstreamParameterized {
             trigger('Job4-Devops_task_6') {
-                condition('UNSTABLE_OR_FAILURER')
+                condition('FAILED')
                 parameters {
                     currentBuild()
                 }
@@ -160,7 +160,7 @@ job("Job4-Devops_task_6")
 	description("Fourth Job: Sending Mail")
 
 	triggers {
-		upstream('Job3-Devops_task_6','FAILED')
+		upstream('Job3-Devops_task_6','FAILURE')
 			}
 	steps {
 		shell('''
