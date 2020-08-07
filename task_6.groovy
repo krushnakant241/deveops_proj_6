@@ -111,7 +111,7 @@ job("Job3-Devops_task_6")
 	description("Third Job: code testing")
 
 	triggers {
-		upstream('Job3-Devops_task_6','SUCCESS')
+		upstream('Job2-Devops_task_6','SUCCESS')
 			}
 	steps {
 		shell('''
