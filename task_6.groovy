@@ -3,7 +3,7 @@ job("Job1-Devops_task_6")
 	description("First Job: To download GitHub code")
         
 	scm {
-		github('krushnakant241/deveops_proj_6', 'master')
+		github('krushnakant241/devops_proj_6', 'master')
 		}
 	
 	triggers { 
@@ -142,34 +142,49 @@ exit 1
 fi
 ''')
 		}
+		
+		publishers {
+        downstreamParameterized {
+            trigger('Job4-Devops_task_6') {
+                condition('UNSTABLE_OR_FAILURER')
+                parameters {
+                    currentBuild()
+                }
+            }
+        }
+    }
 }
 
 job("Job4-Devops_task_6")
 {
-	description("fourth Job: Sending Mail")
+	description("Fourth Job: Sending Mail")
 
 	triggers {
-		upstream('Job3-Devops_task_6','FAILURE')
+		upstream('Job3-Devops_task_6','UNSTABLE_OR_FAILURE')
 			}
-	
+	steps {
+		shell('''
+echo "There is a some error in code or no suitable code found, please refer the logs of job3"
+exit 1
+''')
+		}
+		
 	publishers {
 		extendedEmail {
 			recipientList('krushnakant.ace@gmail.com')
 			defaultSubject('Build failed')
 			defaultContent('testing has been failed so there is error in code. Please check the code')
 			contentType('text/html')
-
-	triggers {
-		beforeBuild()
-		stillUnstable {
-			subject('Subject')
-			content('Body')
-
-	sendTo {
-		developers()
-		requester()
-		culprits()
-				}
+			triggers {
+				beforeBuild()
+				stillUnstable {
+				subject('Subject')
+				content('Body')
+				sendTo {
+					developers()
+					requester()
+					culprits()
+					}
 				}
 			}
 		}
