@@ -1,34 +1,9 @@
-job('Job1-Devops_task_6')
-{
-	description('First Job: To download GitHub code')
-        
-	scm {
-		github('krushnakant241/devops_proj_6', 'master')
-		}
-	
-	triggers { 
-		upstream('Job1(seed job)-Devops-Task-6', 'SUCCESS')
-			}
-	
-	steps {
-		shell('''if ls /home/ | grep code
-				then
-					echo "Directory already present"
-				else
-					sudo mkdir /home/code
-				fi
-
-				sudo rm -rf /home/code/*
-				sudo cp -rvf * /home/code/''')
-		}
-}
-
 job('Job2-Devops_task_6')
 {
 	description('Second Job: To deploy respective code on the kubernetes using correspondence image')
 
 	triggers {
-		upstream('Job1-Devops_task_6', 'SUCCESS')
+		upstream('Job1(seed job)-Devops-Task-6', 'SUCCESS')
 			}
 	
 	steps {
@@ -145,12 +120,9 @@ fi
 		
 		publishers {
         downstreamParameterized {
-            	trigger('Job4-Devops_task_6') {
+            trigger('Job4-Devops_task_6') {
 				condition('FAILED')
 				triggerWithNoParameters()
-//				parameters {
-//                    currentBuild()
-//                }
             }
         }
     }
@@ -196,8 +168,8 @@ buildPipelineView('task6_build_pipeline')
     filterExecutors(false)
     title('Devops_task_6')
     displayedBuilds(1)
-    selectedJob('Job1-Devops_task_6')
+    selectedJob('Job1(seed job)-Devops-Task-6')
     alwaysAllowManualTrigger(true)
     showPipelineParameters(true)
-    refreshFrequency(10)
+    refreshFrequency(5)
 }
