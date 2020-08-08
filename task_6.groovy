@@ -1,6 +1,6 @@
-job("Job1-Devops_task_6")
+job('Job1-Devops_task_6')
 {
-	description("First Job: To download GitHub code")
+	description('First Job: To download GitHub code')
         
 	scm {
 		github('krushnakant241/devops_proj_6', 'master')
@@ -25,7 +25,7 @@ job("Job1-Devops_task_6")
 
 job('Job2-Devops_task_6')
 {
-	description("Second Job: To deploy respective code on the kubernetes using correspondence image")
+	description('Second Job: To deploy respective code on the kubernetes using correspondence image')
 
 	triggers {
 		upstream('Job1-Devops_task_6', 'SUCCESS')
@@ -106,9 +106,9 @@ fi
 }
 
 
-job("Job3-Devops_task_6")
+job('Job3-Devops_task_6')
 {
-	description("Third Job: code testing")
+	description('Third Job: code testing')
 
 	triggers {
 		upstream('Job2-Devops_task_6','SUCCESS')
@@ -145,9 +145,10 @@ fi
 		
 		publishers {
         downstreamParameterized {
-            trigger('Job4-Devops_task_6') {
-                condition('FAILED')
-//               parameters {
+            triggerWithNoParameters('Job4-Devops_task_6' triggerWithNoParameters = true)
+//			trigger('Job4-Devops_task_6') {
+				condition('FAILED')
+//              parameters {
 //                    currentBuild()
 //                }
             }
@@ -155,9 +156,9 @@ fi
     }
 }
 
-job("Job4-Devops_task_6")
+job('Job4-Devops_task_6')
 {
-	description("Fourth Job: Sending Mail")
+	description('Fourth Job: Sending Mail')
 
 	steps {
 		shell('''
@@ -173,14 +174,15 @@ exit 1
 			defaultContent('testing has been failed so there is error in code. Please check the code')
 			contentType('text/html')
 			triggers {
-				beforeBuild()
-				stillUnstable {
-				subject('Subject')
-				content('Body')
-				sendTo {
-					developers()
-					requester()
-					culprits()
+				failure {
+					recipientList('krushnakant.ace@gmail.com')
+					subject('Build failed')
+					content('testing has been failed so there is error in code. Please check the code')
+					contentType('text/html')
+					sendTo {
+						developers()
+						requester()
+						culprits()
 					}
 				}
 			}
@@ -188,13 +190,14 @@ exit 1
 	}
 }
 
-buildPipelineView("task6_build_pipeline") {
+buildPipelineView('task6_build_pipeline') 
+{
 	filterBuildQueue(true)
     filterExecutors(false)
-    title("Devops_task_6")
-    displayedBuilds(4)
-    selectedJob("Job1-Devops_task_6")
+    title('Devops_task_6')
+    displayedBuilds(1)
+    selectedJob('Job1-Devops_task_6')
     alwaysAllowManualTrigger(true)
     showPipelineParameters(true)
-    refreshFrequency(5)
+    refreshFrequency(10)
 }
