@@ -145,8 +145,8 @@ fi
 		
 		publishers {
         downstreamParameterized {
-            triggerWithNoParameters('Job4-Devops_task_6' true)
-//			trigger('Job4-Devops_task_6') {
+            triggerWithNoParameters('Job4-Devops_task_6') {
+//			trigger('Job4-Devops_task_6')
 				condition('FAILED')
 //              parameters {
 //                    currentBuild()
