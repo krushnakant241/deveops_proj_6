@@ -7,7 +7,7 @@ job('Job1-Devops_task_6')
 		}
 	
 	triggers { 
-		scm('* * * * *')
+		upstream('Job1(seed job)-Devops-Task-6', 'SUCCESS')
 			}
 	
 	steps {
