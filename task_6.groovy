@@ -147,7 +147,7 @@ fi
         downstreamParameterized {
             	trigger('Job4-Devops_task_6') {
 				condition('FAILED')
-				triggerWithNoParameters('Job4-Devops_task_6')
+				triggerWithNoParameters()
 //				parameters {
 //                    currentBuild()
 //                }
