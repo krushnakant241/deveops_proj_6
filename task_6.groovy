@@ -148,7 +148,7 @@ fi
             triggerWithNoParameters('Job4-Devops_task_6') 
 			trigger('Job4-Devops_task_6') {
 				condition('FAILED')
-				triggerWithNoParameters()
+				triggerWithNoParameters('Job4-Devops_task_6')
 //				parameters {
 //                    currentBuild()
 //                }
