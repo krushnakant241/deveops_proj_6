@@ -1,1 +1,3 @@
-This is a PHP code
+<?php
+phpinfo();
+?>
